@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.example.dachuang.Dao.DataRepairMapper">
+    <resultMap type="com.example.dachuang.Entity.DataRe" id="DataEntityMap">
+        <id column="id" property="id"/>
+        <result column="user" property="username"/>
+        <result column="dataPath" property="dataPath"/>
+        <result column="datarePath" property="datarePath"/>
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO data_user(
+            user,dataPath,datarePath
+        )
+        VALUES (
+                   #{username},#{dataPath},#{datarePath}
+               )
+    </insert>
+    <update id="updateDataByUser">
+        UPDATE
+            data_user
+        SET
+            dataPath=#{dataPath}
+        WHERE
+            user=#{username}
+    </update>
+    <update id="updateDataReByUser">
+        UPDATE
+            data_user
+        SET
+            datarePath=#{datarePath}
+        WHERE
+            user=#{username}
+    </update>
+    <select id="findByUsername" resultMap="DataEntityMap">
+        select * from data_user where user=#{username}
+    </select>
+</mapper>
